@@ -12,6 +12,7 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 - Client one confirmed as TSTDRV1755417. Profile in `phase0/results/S-00-account-profile.md`.
 - All five example datasets hand-written as manifests: gross orders, P&L, actual sales, cost analysis, FIFO cost layers. All validate.
 - Grammar extended twice from what the manifests needed: a `derived` metric type (D-021) and a `certification` flag (D-022).
+- Databricks and Cube Cloud workspaces exist. Catalog `client_one` with bronze, silver and gold schemas created. Details in `phase0/results/S-00b-workspaces.md`.
 - S-01 done: no cost-layer table is visible. FIFO stays analysis-only.
 - S-02 partly done: the Income Statement can be pulled programmatically, consolidated, at account level. Trial Balance, Inventory Valuation and AR aging are not available to the connected role.
 
@@ -19,7 +20,10 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 
 | Item | Unblocks |
 |---|---|
-| Open workspaces: Cube Cloud and Databricks first, Snowflake when the comparison starts (trials are enough) | Every spike from S-03 on, and the first build |
+| In Cube's connection form (already filled in except the token): create a Databricks access token, paste it, press Apply | Cube reading from Databricks |
+| In Databricks: create the NetSuite connection for Lakeflow Connect and enter the SuiteAnalytics Connect credentials | Landing NetSuite data; every spike from S-03 on |
+| Link the Cube deployment to this GitHub repository | The builder changing the data model by pull request |
+| Open a Snowflake trial when the comparison starts | The bake-off only |
 | O-013: add Trial Balance, Inventory Valuation and AR aging to the connected role's reports, or accept Income Statement tie-outs only | Three of the four tie-outs |
 | O-011: the rounding rule for "ties to the cent" | Certifying consolidated figures |
 
