@@ -21,10 +21,10 @@ How anyone, person or AI agent, picks this project up cold.
 |---|---|
 | Requirements | Stated by the owner; see the implementation plan |
 | Architecture | Chosen on documents, not tested. Phase 0 tests two stacks |
-| Definitions | One draft manifest (gross orders). Four more to hand-write |
+| Definitions | Two draft manifests (gross orders, P&L). Three more to hand-write |
 | Code | A manifest validator and CI. No compiler yet |
-| Access | Read-only NetSuite through the owner's connector. No warehouse or Cube workspace yet |
-| People | Owner named. Finance owner, controller and NetSuite administrator not yet named |
+| Access | NetSuite account TSTDRV1755417 through the owner's connector. No warehouse or Cube workspace yet |
+| People | One owner who holds every human role, and one AI builder |
 
 ## What is not known
 

@@ -1,41 +1,38 @@
 # Governance
 
+One person owns this project. Governance exists to protect the numbers and the accounts, not to pace the work. Nothing here adds a wait that evidence does not require.
+
 ## Roles
 
-| Role | Who | Decides | Does |
-|---|---|---|---|
-| Owner | Dominick Amirr | Priorities, budget, gate go/no-go, scope | Approves merges until a second reviewer exists |
-| Builder | Claude (AI agent) | Nothing binding | Drafts all manifests, code, tests and documents as pull requests |
-| Finance owner | To be named | Metric definitions, certification, tolerances | Reviews tie-outs; approves any change to a number |
-| Client controller | To be named | Client mappings, sign-off at certification | Answers mapping questions; samples figures against NetSuite |
-| NetSuite administrator | To be named | Roles and integration access in NetSuite | Creates the read-only role; deploys scripts when the seconds lane is built |
-
-One person may hold more than one role during phase 0, except that nobody approves their own change.
-
-## Approval rules
-
-| Change | Example | Approver |
+| Role | Who | Does |
 |---|---|---|
-| Additive | New dimension, new metric | Owner |
-| Corrective | Fix that changes a number | Finance owner |
-| Breaking | Definition or grain change | Finance owner and client controller |
-| Client mapping | Account or segment mapping | Client controller |
-| Platform | Schema, compiler, adapter, CI | Owner |
-| Access | Roles, credentials, isolation | Owner |
+| Owner | Dominick Amirr | Decides scope, spending and certification. Holds every human role: finance owner, controller, NetSuite administrator |
+| Builder | Claude (AI agent) | Drafts, tests, merges uncertified work, records everything |
 
-- The author never approves, whether a person or an AI agent.
-- Every change is a pull request. `main` is protected: one approving review and passing checks.
-- A change to a certified metric creates a new version. Closed periods are restated only under the restatement policy (to be written in phase 1).
+## What the builder does without asking
 
-## Gates
+- Opens a pull request for every change and merges it once checks pass.
+- Drafts and edits manifests in `draft`, `mapped` or `reconciled` state.
+- Writes code, tests, spike results and documents.
+- Reads from NetSuite: reports, saved searches, metadata.
 
-Work is funded one phase at a time. Each phase ends at a gate with a written gate pack: evidence, measured effort, forecast, and a go/no-go recommendation. The owner decides.
+## What needs the owner
 
-## Cadence
+Five things only. Each is one decision, not a process.
 
-- Every working session: `STATUS.md` updated.
-- Weekly: owner reviews `STATUS.md` and open decisions.
-- At each gate: gate review.
+| Needs the owner | Why |
+|---|---|
+| Certifying a metric, or changing a certified number | The owner vouches for the figure; the builder cannot vouch for its own work |
+| Any write to NetSuite | It is the book of record. Custom read-only queries have standing approval within the limits in D-018 |
+| Creating accounts, credentials or roles | They belong to the owner |
+| Spending money | It is the owner's money |
+| Changing this file | The builder does not set its own authority |
+
+## Pace
+
+- No calendar schedule. Work runs in dependency order as fast as evidence arrives.
+- A gate is passed when its evidence exists, on whatever day that is.
+- The only waits are real ones: a workspace not yet opened, a permission not yet granted, a test still running, an API limit.
 
 ## Records
 
@@ -44,8 +41,12 @@ Work is funded one phase at a time. Each phase ends at a gate with a written gat
 | Decisions and their evidence | `DECISIONS.md` |
 | Current state and next step | `STATUS.md` |
 | How to pick this work up | `HANDOFF.md` |
-| Spike results | `phase0/` |
+| Spike results | `phase0/results/` |
 
 ## Certification
 
-A metric is certified only when its manifest is merged, its tie-out passes on a common snapshot, and the finance owner has approved. A certified answer is one rendered by a server-delivered component that shows scope, metric version, as-of time and status. Anything an AI assistant writes or computes itself is uncertified.
+A metric is certified only when its manifest is merged, its tie-out passes on a common snapshot, and the owner approves. A certified answer is one rendered by a server-delivered component that shows scope, metric version, as-of time and status. Anything an AI assistant writes or computes itself is uncertified.
+
+## If more people join
+
+Add them here with what they decide. Until then, no rule in this file assumes a second person.
