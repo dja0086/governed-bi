@@ -29,7 +29,10 @@ Verified: `SHOW SCHEMAS IN client_one` returned bronze, silver, gold, default an
 | Item | Value |
 |---|---|
 | Deployment | `domcowboy.cubecloud.dev`, deployment 1 |
-| State | Deployment wizard, step 3 (database connection). Databricks selected; JDBC URL and catalog filled in. Waiting for the owner to enter an access token and apply |
+| State | Databricks connection applied by the owner (not yet verified by a query). AI onboarding skipped. Build & deploy set to "Deploy with Git"; GitHub not yet connected (verified on the settings page, 2026-11-20) |
+| Project in the deployment today | Cube's demo scaffold: `cube.py`, `requirements.txt`, `model/cubes/orders.yml` (literal rows), `model/views/example_view.yml` |
+| Project that will replace it | `cube/` in this repository, branch `main`. Cube's connect dialog states the deployment's project is replaced by the repository's |
+| Production branch shown in Cube | `master`; must be set to `main` when connecting |
 | JDBC URL (no token) | `jdbc:databricks://dbc-8a0a3f41-02fa.cloud.databricks.com:443/default;transportMode=http;ssl=1;AuthMech=3;httpPath=/sql/1.0/warehouses/7c055623cc917a32` |
 | Catalog | `client_one` |
 
@@ -40,6 +43,6 @@ Verified: `SHOW SCHEMAS IN client_one` returned bronze, silver, gold, default an
 
 ## Not yet done
 
-- Cube connection applied and tested (needs the owner's token).
-- Cube linked to this GitHub repository.
+- Cube connection tested by a query (`connection_check` cube, after the repository is connected).
+- Cube linked to this GitHub repository: waits on the owner granting the Cube GitHub app access to `dja0086/governed-bi` in GitHub's pop-up.
 - NetSuite data landed in `client_one.bronze`. Requires a NetSuite connection in Databricks (Lakeflow Connect) with SuiteAnalytics Connect credentials, which the owner must enter.
