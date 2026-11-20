@@ -1,0 +1,6 @@
+# Every change needs the owner's review until more reviewers are named.
+# Replace the finance-owner placeholder lines once O-002 is answered.
+*                 @dja0086
+/manifests/       @dja0086
+/spec/            @dja0086
+/config/clients/  @dja0086

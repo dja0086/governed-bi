@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://governed-bi/spec/manifest.schema.json",
+  "title": "Dataset manifest (v0, draft)",
+  "description": "One manifest per dataset. The manifest is the definition; everything else is generated from it. v0 is a draft to be settled in phase 0 by hand-writing all five example datasets.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["dataset", "version", "owner", "state", "grain", "keys", "sign", "as_of", "currency_basis", "inputs", "freshness", "integrity", "metrics", "dimensions"],
+  "properties": {
+    "dataset": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "owner": {"type": "string"},
+    "state": {"enum": ["draft", "mapped", "reconciled", "certified", "degraded", "retired"]},
+    "grain": {"type": "string"},
+    "keys": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "sign": {"enum": ["natural", "positive_for_orders", "positive_for_revenue", "debit_positive", "credit_positive"]},
+    "as_of": {"enum": ["transaction_date", "posting_period", "load_time"]},
+    "currency_basis": {
+      "type": "array",
+      "items": {"enum": ["transaction", "subsidiary_base", "consolidated"]},
+      "minItems": 1
+    },
+    "consolidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rate_type", "eliminations"],
+      "properties": {
+        "rate_type": {"enum": ["current", "average", "historical", "per_account_type"]},
+        "eliminations": {"enum": ["include_elimination_subsidiary", "exclude", "not_applicable"]},
+        "accounting_book": {"type": "string"}
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "items": {"enum": ["order_line", "invoice_line", "gl_posting", "inventory_movement", "cost_layer", "item", "party", "period", "currency_rate", "subsidiary", "book", "account"]},
+      "minItems": 1
+    },
+    "freshness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["batch"],
+      "properties": {
+        "batch": {"type": "object", "additionalProperties": false, "required": ["target_minutes"], "properties": {"target_minutes": {"type": "integer", "minimum": 1}}},
+        "event": {"type": "object", "additionalProperties": false, "required": ["target_seconds"], "properties": {"target_seconds": {"type": "integer", "minimum": 1}, "status": {"const": "provisional"}}},
+        "live": {"type": "object", "additionalProperties": false, "required": ["allowed"], "properties": {"allowed": {"type": "boolean"}, "badge": {"const": "uncertified"}}}
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deletes", "tie_out"],
+      "properties": {
+        "deletes": {"enum": ["key_set_sweep_nightly", "full_replace", "source_delete_log", "none"]},
+        "delete_latency_hours": {"type": "number", "minimum": 0},
+        "tie_out": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["report", "tolerance"],
+          "properties": {
+            "report": {"type": "string"},
+            "snapshot": {"const": "common"},
+            "exclude_provisional": {"const": true},
+            "tolerance": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["basis", "value"],
+              "properties": {
+                "basis": {"enum": ["absolute_currency", "percent"]},
+                "value": {"type": "number", "minimum": 0}
+              }
+            }
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+          "type": {"enum": ["additive", "semi_additive_balance", "ratio", "period_to_date", "period_over_period", "currency_converted", "allocation", "distinct_count"]},
+          "measure": {"type": "string"},
+          "numerator": {"type": "string"},
+          "denominator": {"type": "string"},
+          "filters": {
+            "type": "array",
+            "items": {"enum": ["exclude_tax_lines", "exclude_shipping_lines", "exclude_closed_lines", "exclude_cancelled_lines", "posting_only", "primary_book_only", "income_accounts", "expense_accounts", "cogs_accounts", "exclude_elimination_subsidiary"]}
+          }
+        }
+      }
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {"type": "string"},
+          {"type": "object", "additionalProperties": false, "required": ["slot"], "properties": {"slot": {"enum": ["custom_segments", "custom_fields"]}}}
+        ]
+      }
+    }
+  }
+}

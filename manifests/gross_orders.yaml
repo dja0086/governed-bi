@@ -1,0 +1,36 @@
+# DRAFT. Not certified. Field values are proposals to be confirmed by the finance owner in phase 0.
+dataset: gross_orders
+version: 0.1.0
+owner: finance.revenue
+state: draft
+grain: sales_order_line
+keys: [transaction_id, line_id]
+sign: positive_for_orders
+as_of: transaction_date
+currency_basis: [transaction, subsidiary_base, consolidated]
+consolidation:
+  rate_type: per_account_type
+  eliminations: exclude
+inputs: [order_line, item, party, period, currency_rate, subsidiary]
+freshness:
+  batch: {target_minutes: 15}
+  event: {target_seconds: 60, status: provisional}
+  live: {allowed: false, badge: uncertified}
+integrity:
+  deletes: key_set_sweep_nightly
+  delete_latency_hours: 24
+  tie_out:
+    report: to_be_confirmed_in_spike_S-02
+    snapshot: common
+    exclude_provisional: true
+    tolerance: {basis: percent, value: 0.1}
+metrics:
+  - id: gross_bookings
+    type: additive
+    measure: line_amount
+    filters: [exclude_tax_lines, exclude_shipping_lines]
+  - id: net_bookings
+    type: additive
+    measure: line_amount
+    filters: [exclude_tax_lines, exclude_shipping_lines, exclude_closed_lines, exclude_cancelled_lines]
+dimensions: [customer, item, subsidiary, department, {slot: custom_segments}]
