@@ -1,0 +1,42 @@
+# DRAFT. Not certified. Values are proposals for the owner to confirm.
+# Two different things are both called "sales": what was billed, and what was recognized
+# as revenue in the ledger. Advanced revenue recognition is on in client one, so they differ.
+# Both are defined here and neither is ever labelled just "sales".
+dataset: actual_sales
+version: 0.1.0
+owner: finance.revenue
+state: draft
+grain: invoice_line
+keys: [transaction_id, line_id]
+sign: positive_for_revenue
+as_of: posting_period
+currency_basis: [transaction, subsidiary_base, consolidated]
+consolidation:
+  rate_type: per_account_type
+  eliminations: include_elimination_subsidiary
+  accounting_book: primary
+inputs: [invoice_line, gl_posting, account, item, party, period, subsidiary, currency_rate]
+freshness:
+  batch: {target_minutes: 15}
+integrity:
+  deletes: key_set_sweep_nightly
+  delete_latency_hours: 24
+  tie_out:
+    report: income_statement
+    snapshot: common
+    exclude_provisional: true
+    tolerance: {basis: absolute_currency, value: 0.01}
+metrics:
+  - id: billings
+    type: additive
+    measure: line_amount
+    filters: [exclude_tax_lines, exclude_shipping_lines]
+  - id: recognized_revenue
+    type: additive
+    measure: posted_amount
+    filters: [posting_only, primary_book_only, income_accounts]
+  - id: recognized_revenue_period_over_period
+    type: period_over_period
+    measure: posted_amount
+    filters: [posting_only, primary_book_only, income_accounts]
+dimensions: [customer, item, account, period, subsidiary, department, class, {slot: custom_segments}]

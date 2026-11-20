@@ -1,0 +1,44 @@
+# DRAFT. Not certified. Values are proposals for the owner to confirm.
+# Cost here means cost as posted to the ledger, never an item's purchase price (D-008).
+dataset: cost_analysis
+version: 0.1.0
+owner: finance.cost
+state: draft
+grain: gl_posting
+keys: [transaction_id, line_id, accounting_book]
+sign: natural
+as_of: posting_period
+currency_basis: [subsidiary_base, consolidated]
+consolidation:
+  rate_type: per_account_type
+  eliminations: include_elimination_subsidiary
+  accounting_book: primary
+inputs: [gl_posting, account, item, period, subsidiary, currency_rate]
+freshness:
+  batch: {target_minutes: 60}
+integrity:
+  deletes: key_set_sweep_nightly
+  delete_latency_hours: 24
+  tie_out:
+    report: income_statement
+    snapshot: common
+    exclude_provisional: true
+    tolerance: {basis: absolute_currency, value: 0.01}
+metrics:
+  - id: revenue
+    type: additive
+    measure: posted_amount
+    filters: [posting_only, primary_book_only, income_accounts]
+  - id: cost_of_goods_sold
+    type: additive
+    measure: posted_amount
+    filters: [posting_only, primary_book_only, cogs_accounts]
+  - id: gross_profit
+    type: derived
+    operator: subtract
+    operands: [revenue, cost_of_goods_sold]
+  - id: gross_margin_pct
+    type: ratio
+    numerator: gross_profit
+    denominator: revenue
+dimensions: [account, item, period, subsidiary, department, class, location, {slot: custom_segments}]
