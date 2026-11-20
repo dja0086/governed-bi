@@ -1,0 +1,30 @@
+# Hand-written. NOT a dataset and NOT certified.
+# Its only job is to prove that Cube reaches the Databricks warehouse and
+# resolves the client catalog. It reads no client data. Delete it once the
+# compiler generates the first model from manifests/ (D-003, D-004).
+cubes:
+  - name: connection_check
+    public: true
+    description: Uncertified plumbing check. Returns one row from the warehouse.
+    sql: >
+      select 1 as id,
+             current_catalog() as catalog_name,
+             current_timestamp() as checked_at
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: catalog_name
+        sql: catalog_name
+        type: string
+
+      - name: checked_at
+        sql: checked_at
+        type: time
+
+    measures:
+      - name: row_count
+        type: count
