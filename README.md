@@ -31,7 +31,7 @@ Phase 0 (evidence gate). See `STATUS.md`.
 ## Rules that do not bend
 
 1. Nobody edits generated output. Change the manifest.
-2. The author of a change never approves it, whether a person or an AI agent.
-3. Anything that changes a number needs the finance owner's approval.
+2. Only the owner certifies a metric or changes a certified number.
+3. No writes to NetSuite without the owner.
 4. No SQL in client overrides.
 5. Unverified claims are labelled unverified until a spike or test proves them.
