@@ -1,6 +1,7 @@
 # DRAFT. Not certified. Values are proposals for the owner to confirm.
-# Grammar gap found while writing this: gross profit and net income are differences of
-# other metrics, and v0 has no metric type for that. See DECISIONS.md O-008.
+# Gross profit and net ordinary income use the `derived` metric type (D-021).
+# Other income and expense, and so net income, are not yet modelled: the filter list has
+# no other-income or other-expense account filters. See DECISIONS.md O-012.
 dataset: pnl
 version: 0.1.0
 owner: finance.reporting
@@ -38,6 +39,18 @@ metrics:
     type: additive
     measure: posted_amount
     filters: [posting_only, primary_book_only, expense_accounts]
+  - id: gross_profit
+    type: derived
+    operator: subtract
+    operands: [revenue, cost_of_goods_sold]
+  - id: net_ordinary_income
+    type: derived
+    operator: subtract
+    operands: [gross_profit, operating_expenses]
+  - id: gross_margin_pct
+    type: ratio
+    numerator: gross_profit
+    denominator: revenue
   - id: revenue_period_to_date
     type: period_to_date
     measure: posted_amount

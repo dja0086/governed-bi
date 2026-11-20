@@ -1,0 +1,31 @@
+# DRAFT. Analysis only: this dataset can never be certified (D-008).
+# Layers are rebuilt from transactions; NetSuite exposes no cost-layer table to this role (S-01).
+# Client one's default costing is average, so whether there is anything to layer is open (O-006).
+dataset: fifo_cost_layers
+version: 0.1.0
+owner: finance.cost
+state: draft
+certification: analysis_only
+grain: receipt_layer
+keys: [item_id, location_id, receipt_transaction_id, receipt_line_id]
+sign: natural
+as_of: transaction_date
+currency_basis: [subsidiary_base]
+inputs: [inventory_movement, cost_layer, item, subsidiary, period]
+freshness:
+  batch: {target_minutes: 1440}
+integrity:
+  deletes: full_replace
+  tie_out:
+    report: inventory_valuation
+    snapshot: common
+    exclude_provisional: true
+    tolerance: {basis: percent, value: 0.5}
+metrics:
+  - id: remaining_quantity
+    type: semi_additive_balance
+    measure: layer_quantity_remaining
+  - id: remaining_value
+    type: semi_additive_balance
+    measure: layer_value_remaining
+dimensions: [item, location, subsidiary]

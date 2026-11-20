@@ -4,39 +4,36 @@ Last updated: 2026-11-20
 
 ## Where we are
 
-Phase 0 (evidence gate) has started. There is no calendar schedule (D-016): work runs in dependency order and the gate passes when its evidence exists.
+Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in dependency order and the gate passes when its evidence exists.
 
 ## Done
 
-- Repository live at github.com/dja0086/governed-bi.
-- Client one confirmed as TSTDRV1755417 (D-014). Account profile read and recorded in `phase0/results/S-00-account-profile.md`.
-- Governance reduced to one owner and one builder (D-015). Five things need the owner; everything else the builder does and merges.
-- Manifests drafted: gross orders, P&L. Both validate.
-- Decisions D-001 to D-017 recorded.
-
-## Running now (no owner input needed)
-
-- Remaining three manifests by hand: actual sales, cost analysis, FIFO cost layers.
-- S-01: look for a cost-layer table in metadata.
-- S-02: list and run the standard reports the tie-outs need, one call at a time.
+- Repository live; pull request 1 merged at the owner's instruction. The builder now merges uncertified work itself.
+- Client one confirmed as TSTDRV1755417. Profile in `phase0/results/S-00-account-profile.md`.
+- All five example datasets hand-written as manifests: gross orders, P&L, actual sales, cost analysis, FIFO cost layers. All validate.
+- Grammar extended twice from what the manifests needed: a `derived` metric type (D-021) and a `certification` flag (D-022).
+- S-01 done: no cost-layer table is visible. FIFO stays analysis-only.
+- S-02 partly done: the Income Statement can be pulled programmatically, consolidated, at account level. Trial Balance, Inventory Valuation and AR aging are not available to the connected role.
 
 ## Blocked on the owner
 
 | Item | Unblocks |
 |---|---|
-| Merge pull request 1 (it changes `GOVERNANCE.md`) | The builder merging its own later work |
-| Open workspaces: Cube Cloud and Databricks first, Snowflake when the bake-off starts (trials are enough) | Every spike from S-03 on |
+| Open workspaces: Cube Cloud and Databricks first, Snowflake when the comparison starts (trials are enough) | Every spike from S-03 on, and the first build |
+| O-013: add Trial Balance, Inventory Valuation and AR aging to the connected role's reports, or accept Income Statement tie-outs only | Three of the four tie-outs |
+| O-011: the rounding rule for "ties to the cent" | Certifying consolidated figures |
 
-Answered on 2026-11-20: Connect is enabled (D-019), the role stays as configured (D-020), custom read-only queries are approved up to 1,000 rows (D-018).
+## Next for the builder (no owner input needed)
+
+- O-014: check whether queries under this role reach every posting the Income Statement includes.
+- O-006: find the item costing-method field and count items by method.
+- O-012: propose other-income and other-expense filters so net income can be defined.
+- Draft the hand-built reference query for gross orders (D-004), ready to run once a warehouse exists.
 
 ## Findings so far
 
-- The connected role is not read-only and may not be able to run financial statements.
-- The account's default costing is average, not FIFO.
-- One accounting book, so multi-book is out of scope (D-017).
-- Light discovery already hit "Too Many Requests". The API budget is a real constraint.
-- The P&L manifest exposed a grammar gap: no way to define gross profit or net income as a difference (O-008).
-
-## Next step
-
-Builder continues the three manifests and S-01/S-02. Owner opens the three workspaces and fixes the role.
+- The posted data sits in 2017; recent years are nearly empty (D-023).
+- Consolidated amounts carry fractions of a cent (O-011).
+- 23 subsidiaries, five of them elimination subsidiaries, four consolidated views, one book.
+- Default costing is average. A grouped query on item costing method was rejected; the field name needs checking.
+- The API budget is small: light discovery hit "Too Many Requests" once.

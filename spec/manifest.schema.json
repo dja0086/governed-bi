@@ -11,6 +11,7 @@
     "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
     "owner": {"type": "string"},
     "state": {"enum": ["draft", "mapped", "reconciled", "certified", "degraded", "retired"]},
+    "certification": {"enum": ["eligible", "analysis_only"]},
     "grain": {"type": "string"},
     "keys": {"type": "array", "items": {"type": "string"}, "minItems": 1},
     "sign": {"enum": ["natural", "positive_for_orders", "positive_for_revenue", "debit_positive", "credit_positive"]},
@@ -82,7 +83,9 @@
         "required": ["id", "type"],
         "properties": {
           "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
-          "type": {"enum": ["additive", "semi_additive_balance", "ratio", "period_to_date", "period_over_period", "currency_converted", "allocation", "distinct_count"]},
+          "type": {"enum": ["additive", "semi_additive_balance", "ratio", "period_to_date", "period_over_period", "currency_converted", "allocation", "distinct_count", "derived"]},
+          "operator": {"enum": ["add", "subtract"]},
+          "operands": {"type": "array", "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}, "minItems": 2},
           "measure": {"type": "string"},
           "numerator": {"type": "string"},
           "denominator": {"type": "string"},

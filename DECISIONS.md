@@ -27,6 +27,10 @@ Each entry: what, who decided, when, and on what basis. "Council" means the thre
 | D-019 | SuiteAnalytics Connect is enabled on client one | Owner | 2026-11-20 | Owner's statement. Not yet confirmed by a connection test |
 | D-020 | The connected NetSuite role stays as configured. The builder still never writes | Owner | 2026-11-20 | Owner: what is set up is permissible. If the tie-out reports are refused under this role, that comes back as a finding from S-02 |
 
+| D-021 | The manifest grammar gains a `derived` metric type: add or subtract two or more named metrics. Closes O-008 | Claude | 2026-11-20 | Gross profit and net ordinary income could not be defined without it. The operator list is closed, so it adds no free-form logic |
+| D-022 | Datasets carry an optional `certification` flag; FIFO cost layers are `analysis_only` | Claude | 2026-11-20 | Makes D-008 enforceable by the compiler instead of by convention |
+| D-023 | Tie-out tests on client one use 2017 periods | Claude | 2026-11-20 | That is where the posted data is (S-02) |
+
 ## Open
 
 | ID | Question | Owner of the answer | Blocks |
@@ -34,7 +38,10 @@ Each entry: what, who decided, when, and on what basis. "Council" means the thre
 | O-005 | Is front-end work needed for certified components, or do Cube's interactive views carry the badges? | Spike S-10 | Go-live 1 design |
 | O-006 | Does any item on client one use FIFO costing? The account default is average | Spike S-01 / discovery | FIFO analysis |
 | O-007 | Does the owner still want a Fable 5.1 review? | Owner | Nothing |
-| O-008 | The manifest grammar has no metric type for a difference of metrics (gross profit, net income). Add a `derived` type with a closed set of operators? | Claude to propose | P&L manifest completeness |
+| O-011 | Consolidated report amounts carry fractions of a cent. What is the rounding rule for "ties to the cent": round each account, or only totals, and how? | Owner | Certifying any consolidated figure |
+| O-012 | The filter list has no other-income or other-expense account filters, so net income cannot be defined. Add them? | Claude to propose | Full P&L |
+| O-013 | Trial Balance, Inventory Valuation and AR aging are not in the connected role's report list. Add them to the role, or tie out only the Income Statement? | Owner | Three of the four tie-outs |
+| O-014 | Can queries under this role reach every posting the Income Statement includes (payroll, rent, depreciation)? | Next discovery pass | Whether the P&L tie-out can pass |
 | O-010 | A test-drive account proves the method, not behaviour on a real company. Which real account follows? | Owner | Selling; not phase 0 |
 
 ## Closed
