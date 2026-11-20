@@ -13,7 +13,8 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 - All five example datasets hand-written as manifests: gross orders, P&L, actual sales, cost analysis, FIFO cost layers. All validate.
 - Grammar extended twice from what the manifests needed: a `derived` metric type (D-021) and a `certification` flag (D-022).
 - Databricks and Cube Cloud workspaces exist. Catalog `client_one` with bronze, silver and gold schemas created. Details in `phase0/results/S-00b-workspaces.md`.
-- Cube: Databricks connection applied by the owner (owner's statement; no query run through it yet, unverified). AI onboarding skipped. The deployment still holds Cube's demo project (`orders` cube on literal rows).
+- Cube is linked to this repository (branch `main`, project directory `cube`); the demo project is gone. Verified 2026-11-20: the `connection_check` cube returned one row through Databricks, so repository to Cube to warehouse works end to end.
+- Finding: that query reported the session catalog as `workspace`, not `client_one`. Models must use fully qualified names (`client_one.<schema>.<table>`) so they do not depend on the connection's default catalog.
 - Cube project added to this repository in `cube/` (pull request 4): configuration plus one uncertified connection check that reads no client data.
 - S-01 done: no cost-layer table is visible. FIFO stays analysis-only.
 - S-02 partly done: the Income Statement can be pulled programmatically, consolidated, at account level. Trial Balance, Inventory Valuation and AR aging are not available to the connected role.
@@ -23,7 +24,6 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 | Item | Unblocks |
 |---|---|
 | In Databricks: create the NetSuite connection for Lakeflow Connect and enter the SuiteAnalytics Connect credentials | Landing NetSuite data; every spike from S-03 on |
-| In Cube, Settings, Build & deploy, Connect to GitHub: add the GitHub account in the pop-up, granting the Cube app access to `dja0086/governed-bi` only. Verified 2026-11-20: "Deploy with Git" is selected but no GitHub organization is connected yet | The builder connecting the repository (branch `main`, project directory `cube`) and changing the data model by pull request |
 | Open a Snowflake trial when the comparison starts | The bake-off only |
 | O-013: add Trial Balance, Inventory Valuation and AR aging to the connected role's reports, or accept Income Statement tie-outs only | Three of the four tie-outs |
 | O-011: the rounding rule for "ties to the cent" | Certifying consolidated figures |
