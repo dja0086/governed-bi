@@ -23,17 +23,18 @@ Each entry: what, who decided, when, and on what basis. "Council" means the thre
 | D-015 | The owner is the only person and holds every human role. The builder merges uncertified work itself. Five things need the owner (see `GOVERNANCE.md`) | Owner | 2026-11-20 | Owner: "no artificial red tape" |
 | D-016 | No calendar schedule. Work runs in dependency order; a gate passes when its evidence exists. This replaces the six-week timebox in D-010 | Owner | 2026-11-20 | Owner: no schedules that run slower than needed |
 | D-017 | Multi-book translation is out of scope for client one | Claude | 2026-11-20 | The account has one accounting book (S-00) |
+| D-018 | Custom read-only SuiteQL queries against client one have standing approval. Default to aggregates; hard ceiling of 1,000 rows per query; anything larger goes through the batch lane | Owner approved; cap set by Claude | 2026-11-20 | 1,000 rows is one page, so one request and one concurrency slot (Oracle paging documentation). The account already throttled light discovery. Bulk belongs in the governed batch lane |
+| D-019 | SuiteAnalytics Connect is enabled on client one | Owner | 2026-11-20 | Owner's statement. Not yet confirmed by a connection test |
+| D-020 | The connected NetSuite role stays as configured. The builder still never writes | Owner | 2026-11-20 | Owner: what is set up is permissible. If the tie-out reports are refused under this role, that comes back as a finding from S-02 |
 
 ## Open
 
 | ID | Question | Owner of the answer | Blocks |
 |---|---|---|---|
-| O-004 | Is SuiteAnalytics Connect enabled on client one? | Owner | The 15-minute batch lane through most connectors |
 | O-005 | Is front-end work needed for certified components, or do Cube's interactive views carry the badges? | Spike S-10 | Go-live 1 design |
 | O-006 | Does any item on client one use FIFO costing? The account default is average | Spike S-01 / discovery | FIFO analysis |
 | O-007 | Does the owner still want a Fable 5.1 review? | Owner | Nothing |
 | O-008 | The manifest grammar has no metric type for a difference of metrics (gross profit, net income). Add a `derived` type with a closed set of operators? | Claude to propose | P&L manifest completeness |
-| O-009 | The connected role can write (customers, File Cabinet) and may lack financial-report permission. Narrow it and add report access? | Owner | S-02 tie-out harness |
 | O-010 | A test-drive account proves the method, not behaviour on a real company. Which real account follows? | Owner | Selling; not phase 0 |
 
 ## Closed
@@ -42,3 +43,5 @@ Each entry: what, who decided, when, and on what basis. "Council" means the thre
 |---|---|---|
 | O-001 | Is United Refractories client one? | No. Client one is TSTDRV1755417 (D-014). An earlier subsidiary read came from the United Refractories connector and is not used |
 | O-002, O-003 | Who are the finance owner and NetSuite administrator? | The owner (D-015) |
+| O-004 | Is SuiteAnalytics Connect enabled? | Yes, per the owner (D-019) |
+| O-009 | Narrow the connected role? | No (D-020) |

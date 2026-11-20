@@ -23,7 +23,7 @@ Five things only. Each is one decision, not a process.
 | Needs the owner | Why |
 |---|---|
 | Certifying a metric, or changing a certified number | The owner vouches for the figure; the builder cannot vouch for its own work |
-| Any write to NetSuite, and any custom query against it | It is the book of record |
+| Any write to NetSuite | It is the book of record. Custom read-only queries have standing approval within the limits in D-018 |
 | Creating accounts, credentials or roles | They belong to the owner |
 | Spending money | It is the owner's money |
 | Changing this file | The builder does not set its own authority |

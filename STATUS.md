@@ -24,10 +24,10 @@ Phase 0 (evidence gate) has started. There is no calendar schedule (D-016): work
 
 | Item | Unblocks |
 |---|---|
-| Open workspaces: Databricks, Snowflake, Cube Cloud (trials are enough) | The bake-off and every spike from S-03 on |
-| Check whether SuiteAnalytics Connect is enabled (O-004) | The batch lane design |
-| Narrow the connected role to read-only and add financial-report access (O-009) | S-02, and safe operation |
-| Say yes or no to custom read-only SuiteQL queries against client one, capped at 1,000 rows | Faster discovery in S-01 and S-03 |
+| Merge pull request 1 (it changes `GOVERNANCE.md`) | The builder merging its own later work |
+| Open workspaces: Cube Cloud and Databricks first, Snowflake when the bake-off starts (trials are enough) | Every spike from S-03 on |
+
+Answered on 2026-11-20: Connect is enabled (D-019), the role stays as configured (D-020), custom read-only queries are approved up to 1,000 rows (D-018).
 
 ## Findings so far
 
