@@ -76,3 +76,15 @@ Also on 2026-11-20: the owner added a payment method to the Databricks account (
 ## Re-test 2026-11-21 03:21 UTC (about 40 minutes after the payment method was added)
 
 Verified, notebook cell 2 re-run on serverless: `pypi.org` resolves; `www.netsuite.com`, `system.netsuite.com` and the three `tstdrv1755417.*.netsuite.com` hosts return no address. The block is unchanged. The pipeline's Source step was not retried, because it cannot succeed without name resolution. Modelling is not blocked: see `S-03c-seed-load.md`.
+
+## New account on a business email (2026-11-21)
+
+Workspace 7474653267700225, created by the owner with express setup on a company-domain email.
+
+- Verified 12:33 UTC, still a trial: `pypi.org` resolves; `example.com`, `www.oracle.com` and five NetSuite hosts return no address; TCP to the Connect host on 1708 fails.
+- Verified 12:45 UTC, after the owner added a payment method (the "Manage Trial" button is gone): same result, on a fresh run and again in a new serverless session.
+- Verified: the account console's Security > Networking has no egress policy page (Private endpoints, Network connectivity configurations, Classic network configurations, Private access settings only).
+
+Conclusion: neither a business email nor a payment method lifts the restriction by itself within minutes. This matches two Databricks Community reports (threads 174117 and 173281), where a Databricks employee says the account team has to verify the account. Unverified: whether the restriction clears with time, and whether verification works; no poster confirmed an outcome.
+
+The old account could not be re-tested in the same browser session (signed in to the new account).
