@@ -1,0 +1,18 @@
+{
+  "id": "gross_orders_by_year",
+  "state": "draft",
+  "certified": false,
+  "dataset": "gross_orders",
+  "connector": "NetSuite",
+  "tool": "ns_runCustomSuiteQL",
+  "args": {
+    "sqlQuery": "SELECT * FROM (SELECT TO_CHAR(t.trandate,'YYYY') AS order_year, COUNT(DISTINCT t.id) AS orders, COUNT(*) AS order_lines, SUM(NVL(-tl.netamount,0)) AS gross_bookings FROM transaction t JOIN transactionline tl ON tl.transaction = t.id WHERE t.type = 'SalesOrd' AND tl.mainline = 'F' AND tl.taxline = 'F' AND NVL(tl.itemtype,'x') NOT IN ('ShipItem','TaxItem','TaxGroup') GROUP BY TO_CHAR(t.trandate,'YYYY') ORDER BY 1) WHERE ROWNUM <= 1000",
+    "description": "Gross bookings by order year from sales order lines, excluding tax and shipping lines (aggregates only)"
+  },
+  "open_points": [
+    "Amounts are tl.netamount summed across subsidiaries with no currency conversion; the manifest requires transaction, subsidiary-base and consolidated bases.",
+    "Sign: sales order lines carry negative netamount, so the query negates it. Verified only by the result being positive.",
+    "Closed and cancelled lines are included (gross_bookings); net_bookings is not built.",
+    "Not tied to a NetSuite report (manifest tie_out.report is to be confirmed)."
+  ]
+}
