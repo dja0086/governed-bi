@@ -25,7 +25,7 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 
 | Item | Unblocks |
 |---|---|
-| Upload the driver JAR itself (`NQjc.jar`, from inside the downloaded zip) to `/Volumes/client_one/bronze/netsuite_jars`. Only the zip is there now, and the pipeline needs a JAR path | Creating the ingestion pipeline; every spike from S-03 on |
+| In NetSuite: give the integration user the Data Warehouse Integrator role and create an access token under it. In Databricks: edit connection `ns_tstdrv` with that role's internal ID and the new token | Retrying ingestion (first attempt failed, see `phase0/results/S-03a-ingestion-first-attempt.md`) |
 | Open a Snowflake trial when the comparison starts | The bake-off only |
 | O-013: add Trial Balance, Inventory Valuation and AR aging to the connected role's reports, or accept Income Statement tie-outs only | Three of the four tie-outs |
 | O-011: the rounding rule for "ties to the cent" | Certifying consolidated figures |
