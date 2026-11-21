@@ -31,6 +31,7 @@ Each entry: what, who decided, when, and on what basis. "Council" means the thre
 | D-022 | Datasets carry an optional `certification` flag; FIFO cost layers are `analysis_only` | Claude | 2026-11-20 | Makes D-008 enforceable by the compiler instead of by convention |
 | D-023 | Tie-out tests on client one use 2017 periods | Claude | 2026-11-20 | That is where the posted data is (S-02) |
 | D-024 | The Cube project lives in `cube/` in this repository; Cube Cloud builds from branch `main` with project directory `cube` | Claude | 2026-11-20 | Cube's connect dialog offers a project directory for monorepos (seen on the settings page). One repository keeps manifests and generated model under one review and one history (D-003) |
+| D-026 | Seed load: a one-time export from the owner's Mac into `client_one.bronze` stands in for ingestion until Databricks egress opens. Not the production path | Owner ("Agreed with 1 and 2") | 2026-11-20 | Login and query from the Mac succeeded while Databricks DNS to netsuite.com failed (S-03b). 15 tables landed, counts match (S-03c) |
 | D-025 | No Snowflake. The two-stack bake-off (D-010) is withdrawn; Databricks + Cube is the stack | Owner | 2026-11-20 | Owner's instruction. Consequence: the choice rests on the documentary comparison, not on a head-to-head test |
 
 ## Open
@@ -44,7 +45,7 @@ Each entry: what, who decided, when, and on what basis. "Council" means the thre
 | O-012 | The filter list has no other-income or other-expense account filters, so net income cannot be defined. Add them? | Claude to propose | Full P&L |
 | O-013 | Trial Balance, Inventory Valuation and AR aging are not in the connected role's report list. Add them to the role, or tie out only the Income Statement? | Owner | Three of the four tie-outs |
 | O-014 | Can queries under this role reach every posting the Income Statement includes (payroll, rent, depreciation)? | Next discovery pass | Whether the P&L tie-out can pass |
-| O-015 | The ingestion token appears to sit on a full-access role (1453, "Power User": full on transactions, Manage Users, SuiteScript). Acceptable on the test-drive account; move to a dedicated read-only role before any real account? | Owner | Onboarding a real account |
+| O-015 | Partly resolved: the Databricks connection and the seed export use role 57 (Data Warehouse Integrator), verified by a successful login under that role. Still open: confirm role 57 is read-only in practice and retire the token's access to role 1453 before any real account | Owner | Onboarding a real account |
 | O-010 | A test-drive account proves the method, not behaviour on a real company. Which real account follows? | Owner | Selling; not phase 0 |
 
 ## Closed

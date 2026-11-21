@@ -1,6 +1,6 @@
 # Status
 
-Last updated: 2026-11-20
+Last updated: 2026-11-21
 
 ## Where we are
 
@@ -18,6 +18,8 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 - Cube project added to this repository in `cube/` (pull request 4): configuration plus one uncertified connection check that reads no client data.
 - Databricks connection `ns_tstdrv` to NetSuite exists (host `tstdrv1755417.connect.api.netsuite.com`, port 1708), created by the owner 2026-11-20. Not yet proven by a read. Volume `client_one.bronze.netsuite_jars` created.
 - NetSuite role 1453 ("Power User") carries every permission the connector guide lists, including SuiteAnalytics Connect and Log in using Access Tokens (read from the role page). It is also a full-access role; whether the token should move to a read-only role is the owner's call (O-015).
+- NetSuite Connect login and query proven from the owner's Mac under role 57 with driver 8.10.190.0, so the NetSuite side is correct (S-03b).
+- Seed load done: 15 NetSuite tables are in `client_one.bronze`, row counts matching the export (`phase0/results/S-03c-seed-load.md`). A snapshot, not a pipeline. Scripts in `pipelines/seed/`.
 - S-01 done: no cost-layer table is visible. FIFO stays analysis-only.
 - S-02 partly done: the Income Statement can be pulled programmatically, consolidated, at account level. Trial Balance, Inventory Valuation and AR aging are not available to the connected role.
 
@@ -25,7 +27,7 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 
 | Item | Unblocks |
 |---|---|
-| Lift the Databricks trial's serverless egress restriction: account console network policy, or a request to Databricks, or a non-trial workspace (see `phase0/results/S-03b-ingestion-root-cause.md`) | Landing NetSuite data; every spike from S-03 on |
+| Databricks serverless egress is still blocked after the payment method was added, and the help centre rejects the owner's login. Routes left: wait and re-test, a public community post, Enterprise tier (costs money; unverified that it lifts the block), or an extractor outside Databricks serverless | Scheduled, incremental ingestion. No longer blocks modelling: the seed load covers it |
 | O-013: add Trial Balance, Inventory Valuation and AR aging to the connected role's reports, or accept Income Statement tie-outs only | Three of the four tie-outs |
 | O-011: the rounding rule for "ties to the cent" | Certifying consolidated figures |
 
@@ -34,7 +36,10 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 - O-014: check whether queries under this role reach every posting the Income Statement includes.
 - O-006: find the item costing-method field and count items by method.
 - O-012: propose other-income and other-expense filters so net income can be defined.
-- Draft the hand-built reference query for gross orders (D-004), ready to run once a warehouse exists.
+- Write and run the hand-built reference query for gross orders (D-004) on `client_one.bronze`.
+- Income Statement tie-out on the seed data (report 589, 2017 periods, D-023).
+- First real Cube model on bronze, fully qualified names.
+- Re-test Databricks egress; if open, run the managed pipeline.
 
 ## Findings so far
 
