@@ -51,7 +51,7 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 - Approved 2026-11-21: own extraction service on AWS pushing into Databricks. Document: https://claude.ai/artifact/3t3kBkq5i4PwX2wngyzKGx
 - Verified from the export manifest (column names only): 14 of 15 tables carry a last-modified column (`lastmodifieddate`; `linelastmodifieddate` on transactionline). `consolidatedexchangerate` has none and is re-read in full each run (29,078 rows on client one).
 - Verified 2026-11-21: role 57 reads DeletedRecord over Connect (68,120 rows, current to 2026-11-20). O-016 closed.
-- Unverified: Zerobus in our workspace (O-017, needs a service principal from the owner). AWS account exists (us-east-2), nothing deployed.
+- Unverified: Zerobus in our workspace (O-017, needs a service principal from the owner). AWS account exists (us-east-2, "new" sign-up type), nothing deployed. Its limits are in `phase0/results/S-04a-aws-account-limits.md`; Fargate and fixed outbound address are unverified there.
 
 ## Findings so far
 
