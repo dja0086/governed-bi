@@ -26,7 +26,6 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 | Item | Unblocks |
 |---|---|
 | Lift the Databricks trial's serverless egress restriction: account console network policy, or a request to Databricks, or a non-trial workspace (see `phase0/results/S-03b-ingestion-root-cause.md`) | Landing NetSuite data; every spike from S-03 on |
-| Open a Snowflake trial when the comparison starts | The bake-off only |
 | O-013: add Trial Balance, Inventory Valuation and AR aging to the connected role's reports, or accept Income Statement tie-outs only | Three of the four tie-outs |
 | O-011: the rounding rule for "ties to the cent" | Certifying consolidated figures |
 

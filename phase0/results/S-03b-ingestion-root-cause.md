@@ -48,3 +48,19 @@ Confidence: high for serverless notebook compute (measured). One link is inferre
 2. Ask Databricks to lift the trial egress restriction (help.databricks.com; include workspace ID 7474655419666822 and this evidence).
 3. Use a workspace that is not an express-setup trial.
 4. Run the Snowflake arm of the bake-off first while this is resolved.
+
+## Follow-up, same day: what the account console shows (read on screen)
+
+| Item | Value |
+|---|---|
+| Plan | Premium. Enterprise is offered as an upgrade |
+| Credit | $400 trial credit, $392 remaining, expires 2026-12-04. No payment method on file |
+| Workspace | `workspace`, us-east-2, "Serverless only", default storage |
+| Security, Networking | Private endpoints, Network connectivity configurations, Classic network configurations, Private access settings. No "Network policies" entry, so option 1 is not available on this account |
+| Create workspace | Two choices: serverless with default storage, or "Use your existing cloud account" (needs the owner's AWS account; supports custom compute) |
+
+Databricks' documentation says serverless egress network policies require the Enterprise tier. That matches the missing menu entry.
+
+Open point on option 3: the NetSuite connector requires serverless pipelines. Whether serverless egress is unrestricted in a workspace created on the owner's own AWS account, inside this same trial account, is unverified. A classic-compute workspace alone would not help if the connector's serverless compute stays restricted.
+
+Owner decision 2026-11-20: no Snowflake (D-025).
