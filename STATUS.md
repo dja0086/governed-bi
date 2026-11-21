@@ -46,6 +46,12 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 - D-027: production-grade architecture only. The seed load is a stopgap. The GitHub runner reach test (branch `runner-reach-test`, unmerged) proved reachability and is not an ingestion design.
 - New Databricks account on a business email exists (workspace 7474653267700225). Verified 2026-11-21: serverless egress to NetSuite is blocked there too while it is a trial. Payment method added 2026-11-21; still blocked (S-03b). Not migrated. Next: account verification request to Databricks, sent by the owner.
 
+## Ingestion architecture (D-028)
+
+- Approved 2026-11-21: own extraction service on AWS pushing into Databricks. Document: https://claude.ai/artifact/3t3kBkq5i4PwX2wngyzKGx
+- Verified from the export manifest (column names only): 14 of 15 tables carry a last-modified column (`lastmodifieddate`; `linelastmodifieddate` on transactionline). `consolidatedexchangerate` has none and is re-read in full each run (29,078 rows on client one).
+- Unverified: DeletedRecord under role 57 (O-016), Zerobus in our workspace (O-017).
+
 ## Findings so far
 
 - The posted data sits in 2017; recent years are nearly empty (D-023).
