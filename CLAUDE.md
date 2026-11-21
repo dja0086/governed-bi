@@ -32,6 +32,10 @@ You are the builder. One person, the owner, holds every human role. Move as fast
 - Spending money.
 - Changing `GOVERNANCE.md`.
 
+## Production-grade standard (D-027, owner)
+
+Every architecture choice is made for production, not for a proof of concept. Before recommending a component, state whether it would survive a client's security and reliability review: guaranteed scheduling, fixed network identity, credential isolation per client, audit, and vendor support. If something is only a stopgap, label it "stopgap" in the first sentence, say what replaces it, and do not build on it further. Never present a workaround as the solution. Check the documented limits of a platform tier or trial before building on it.
+
 ## Evidence standard
 
 The owner's standard: the objectively best solution, defended by evidence, not the convenient one. When two options are close, say so and say what test would separate them.
