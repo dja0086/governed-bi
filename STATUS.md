@@ -46,7 +46,14 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 - D-027: production-grade architecture only. The seed load is a stopgap. The GitHub runner reach test (branch `runner-reach-test`, unmerged) proved reachability and is not an ingestion design.
 - New Databricks account on a business email exists (workspace 7474653267700225). Verified 2026-11-21: serverless egress to NetSuite is blocked there too while it is a trial. Payment method added 2026-11-21; still blocked (S-03b). Not migrated. Next: account verification request to Databricks, sent by the owner.
 
-## Ingestion architecture (D-028)
+## Direction (D-029, owner, 2026-11-21)
+
+- Version 1: direct to NetSuite, no database. Chat and report building through Claude on Oracle's NetSuite AI Connector; standing dashboards in NetSuite's own analytics; Knowi under evaluation as a dashboard product on live SuiteQL.
+- Version 2: Databricks + AWS extraction service + Cube. Paused. Everything below under D-028 is version 2.
+- Next: run the five datasets live against client one and record, for each, tie-out, duration and whether it stays inside the connector's limits. FIFO is the open one.
+- The seed data in the first Databricks account and the two Databricks workspaces are idle. Nothing is deployed in AWS.
+
+## Ingestion architecture (D-028, version 2, paused)
 
 - Approved 2026-11-21: own extraction service on AWS pushing into Databricks. Document: https://claude.ai/artifact/3t3kBkq5i4PwX2wngyzKGx
 - Verified from the export manifest (column names only): 14 of 15 tables carry a last-modified column (`lastmodifieddate`; `linelastmodifieddate` on transactionline). `consolidatedexchangerate` has none and is re-read in full each run (29,078 rows on client one).
