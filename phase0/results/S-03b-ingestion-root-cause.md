@@ -64,3 +64,11 @@ Databricks' documentation says serverless egress network policies require the En
 Open point on option 3: the NetSuite connector requires serverless pipelines. Whether serverless egress is unrestricted in a workspace created on the owner's own AWS account, inside this same trial account, is unverified. A classic-compute workspace alone would not help if the connector's serverless compute stays restricted.
 
 Owner decision 2026-11-20: no Snowflake (D-025).
+
+## NetSuite side proven independently (2026-11-20)
+
+A login test run by the owner from their own computer, outside Databricks, with the same host, port, account, role 57 and the same four token values, using the same driver file (NQjc.jar 8.10.190.0): RESULT SUCCESS. It logged in with token-based authentication and ran `SELECT COUNT(*) FROM subsidiary` on NetSuite2.com. Source: the owner's report of the script's output; the builder never saw the secrets. Not cross-checked in the Login Audit Trail.
+
+What this settles: SuiteAnalytics Connect is live on the account (closes the open part of D-019), token-based authentication, the integration record, the token, role 57 and driver 8.10.190.0 all work. The only remaining fault is Databricks' serverless egress.
+
+Also on 2026-11-20: the owner added a payment method to the Databricks account (the workspace header changed from "Manage Trial" to "Credits"). A re-test minutes later still could not resolve netsuite.com hosts. Databricks' trial documentation lists "Limited external network access" as a trial limitation and says adding payment information removes trial limitations.
