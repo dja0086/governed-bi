@@ -49,7 +49,6 @@ Each entry: what, who decided, when, and on what basis. "Council" means the thre
 | O-014 | Can queries under this role reach every posting the Income Statement includes (payroll, rent, depreciation)? | Next discovery pass | Whether the P&L tie-out can pass |
 | O-015 | Partly resolved: the Databricks connection and the seed export use role 57 (Data Warehouse Integrator), verified by a successful login under that role. Still open: confirm role 57 is read-only in practice and retire the token's access to role 1453 before any real account | Owner | Onboarding a real account |
 | O-017 | Zerobus Ingest in our workspace: needs a service principal and secret (owner creates) before the 100-row push test | Owner | Landing step |
-| O-018 | AWS account for the extraction service | Owner | Deploying the service; not the tests |
 | O-010 | A test-drive account proves the method, not behaviour on a real company. Which real account follows? | Owner | Selling; not phase 0 |
 
 ## Closed
@@ -57,6 +56,7 @@ Each entry: what, who decided, when, and on what basis. "Council" means the thre
 | ID | Question | Answer |
 |---|---|---|
 | O-016 | Can role 57 read DeletedRecord over Connect? | Yes. Verified 2026-11-21 by the owner running `pipelines/checks/ns_deleted_check.sh`: 68,120 rows, deleteddate from 2010-05-31 to 2026-11-20. The MCP connector's role cannot see the table; role 57 can. Open detail: column list and the count by type sorted by size were not captured (output cut at 60 types) |
+| O-018 | AWS account for the extraction service | Created by the owner 2026-11-21, home region us-east-2. Nothing deployed yet |
 | O-001 | Is United Refractories client one? | No. Client one is TSTDRV1755417 (D-014). An earlier subsidiary read came from the United Refractories connector and is not used |
 | O-002, O-003 | Who are the finance owner and NetSuite administrator? | The owner (D-015) |
 | O-004 | Is SuiteAnalytics Connect enabled? | Yes, per the owner (D-019) |
