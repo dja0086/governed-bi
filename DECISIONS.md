@@ -31,6 +31,7 @@ Each entry: what, who decided, when, and on what basis. "Council" means the thre
 | D-022 | Datasets carry an optional `certification` flag; FIFO cost layers are `analysis_only` | Claude | 2026-11-20 | Makes D-008 enforceable by the compiler instead of by convention |
 | D-023 | Tie-out tests on client one use 2017 periods | Claude | 2026-11-20 | That is where the posted data is (S-02) |
 | D-024 | The Cube project lives in `cube/` in this repository; Cube Cloud builds from branch `main` with project directory `cube` | Claude | 2026-11-20 | Cube's connect dialog offers a project directory for monorepos (seen on the settings page). One repository keeps manifests and generated model under one review and one history (D-003) |
+| D-025 | No Snowflake. The two-stack bake-off (D-010) is withdrawn; Databricks + Cube is the stack | Owner | 2026-11-20 | Owner's instruction. Consequence: the choice rests on the documentary comparison, not on a head-to-head test |
 
 ## Open
 
