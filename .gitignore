@@ -2,3 +2,6 @@ __pycache__/
 .venv/
 *.pyc
 .env
+seed_out/
+*.jar
+*.jsonl.gz
