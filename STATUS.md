@@ -50,6 +50,7 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 
 - Version 1: direct to NetSuite, no database. Chat and report building through Claude on Oracle's NetSuite AI Connector; standing dashboards in NetSuite's own analytics; Knowi under evaluation as a dashboard product on live SuiteQL.
 - Version 2: Databricks + AWS extraction service + Cube. Paused. Everything below under D-028 is version 2.
+- Version 1 design, proposed 2026-11-21, awaiting the owner's approval: https://claude.ai/artifact/6XHtS74JWe9Acv4DqmXxzb . Core: a Git-backed Claude plugin (skills + certified queries), Claude Data dashboards on the NetSuite connector, scheduled tasks for briefs. Verified from Anthropic's Claude Data article and the Data artifact type's guide: a dashboard dataset is one stored connector tool call run on each reader's own connection; certified queries (beta) carry a badge and can be managed in GitHub through a Git-backed plugin; no scheduled refresh of live queries. Unverified: that a NetSuite connector call works as a stored query, and the certified-query file format. Knowi trial is next for evaluation.
 - Next: run the five datasets live against client one and record, for each, tie-out, duration and whether it stays inside the connector's limits. FIFO is the open one.
 - The seed data in the first Databricks account and the two Databricks workspaces are idle. Nothing is deployed in AWS.
 
