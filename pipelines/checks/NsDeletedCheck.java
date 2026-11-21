@@ -65,18 +65,24 @@ public class NsDeletedCheck {
     System.out.println("Connecting ...");
     try (Connection c = DriverManager.getConnection(url, p)) {
       System.out.println("Connected.");
+      // Column names, read from result metadata of a one-row query (no rows printed).
+      System.out.println("COLUMNS of deletedrecord:");
+      try (Statement s0 = c.createStatement()) {
+        s0.setMaxRows(1);
+        try (ResultSet r0 = s0.executeQuery("SELECT * FROM deletedrecord")) {
+          ResultSetMetaData md = r0.getMetaData();
+          for (int i = 1; i <= md.getColumnCount(); i++) System.out.println("  " + md.getColumnLabel(i).toLowerCase() + " : " + md.getColumnTypeName(i));
+          System.out.println("  OK");
+        }
+      } catch (Throwable e) { System.out.println("  FAILED " + e.getClass().getSimpleName() + ": " + e.getMessage()); }
       String[] qs = {
-        "SELECT COUNT(*) FROM deletedrecord",
-        "SELECT MIN(deleteddate), MAX(deleteddate) FROM deletedrecord",
-        "SELECT type, COUNT(*) FROM deletedrecord GROUP BY type",
-        "SELECT table_name FROM OA_TABLES WHERE LOWER(table_name) LIKE '%delet%'",
-        "SELECT column_name FROM OA_COLUMNS WHERE LOWER(table_name) = 'deletedrecord'"
+        "SELECT type, COUNT(*) AS n FROM deletedrecord GROUP BY type HAVING COUNT(*) > 1 ORDER BY 2 DESC"
       };
       for (String q : qs) {
         System.out.println("QUERY: " + q);
         try (Statement s = c.createStatement(); ResultSet rs = s.executeQuery(q)) {
           int k = rs.getMetaData().getColumnCount(); int n = 0;
-          while (rs.next() && n++ < 60) {
+          while (rs.next() && n++ < 40) {
             StringBuilder b = new StringBuilder("  ");
             for (int i = 1; i <= k; i++) b.append(rs.getString(i)).append(i < k ? " | " : "");
             System.out.println(b);
