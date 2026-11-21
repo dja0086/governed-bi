@@ -1,0 +1,22 @@
+name: netsuite-reach-test
+# Sends no credentials and reads no data. Checks only whether a GitHub-hosted runner
+# can resolve and open a TLS connection to the NetSuite Connect port.
+on:
+  workflow_dispatch:
+  push:
+    branches: [runner-reach-test]
+jobs:
+  reach:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: DNS, TCP and TLS to NetSuite Connect
+        run: |
+          python3 - <<'PY'
+          import socket, ssl
+          h, p = "tstdrv1755417.connect.api.netsuite.com", 1708
+          print("dns", socket.gethostbyname(h))
+          s = socket.create_connection((h, p), timeout=20); print("tcp ok")
+          t = ssl.create_default_context().wrap_socket(s, server_hostname=h)
+          print("tls", t.version(), t.cipher()[0])
+          PY
