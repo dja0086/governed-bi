@@ -72,3 +72,7 @@ A login test run by the owner from their own computer, outside Databricks, with 
 What this settles: SuiteAnalytics Connect is live on the account (closes the open part of D-019), token-based authentication, the integration record, the token, role 57 and driver 8.10.190.0 all work. The only remaining fault is Databricks' serverless egress.
 
 Also on 2026-11-20: the owner added a payment method to the Databricks account (the workspace header changed from "Manage Trial" to "Credits"). A re-test minutes later still could not resolve netsuite.com hosts. Databricks' trial documentation lists "Limited external network access" as a trial limitation and says adding payment information removes trial limitations.
+
+## Re-test 2026-11-21 03:21 UTC (about 40 minutes after the payment method was added)
+
+Verified, notebook cell 2 re-run on serverless: `pypi.org` resolves; `www.netsuite.com`, `system.netsuite.com` and the three `tstdrv1755417.*.netsuite.com` hosts return no address. The block is unchanged. The pipeline's Source step was not retried, because it cannot succeed without name resolution. Modelling is not blocked: see `S-03c-seed-load.md`.
