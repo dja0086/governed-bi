@@ -16,6 +16,8 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 - Cube is linked to this repository (branch `main`, project directory `cube`); the demo project is gone. Verified 2026-11-20: the `connection_check` cube returned one row through Databricks, so repository to Cube to warehouse works end to end.
 - Finding: that query reported the session catalog as `workspace`, not `client_one`. Models must use fully qualified names (`client_one.<schema>.<table>`) so they do not depend on the connection's default catalog.
 - Cube project added to this repository in `cube/` (pull request 4): configuration plus one uncertified connection check that reads no client data.
+- Databricks connection `ns_tstdrv` to NetSuite exists (host `tstdrv1755417.connect.api.netsuite.com`, port 1708), created by the owner 2026-11-20. Not yet proven by a read. Volume `client_one.bronze.netsuite_jars` created.
+- NetSuite role 1453 ("Power User") carries every permission the connector guide lists, including SuiteAnalytics Connect and Log in using Access Tokens (read from the role page). It is also a full-access role; whether the token should move to a read-only role is the owner's call (O-015).
 - S-01 done: no cost-layer table is visible. FIFO stays analysis-only.
 - S-02 partly done: the Income Statement can be pulled programmatically, consolidated, at account level. Trial Balance, Inventory Valuation and AR aging are not available to the connected role.
 
@@ -23,7 +25,7 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 
 | Item | Unblocks |
 |---|---|
-| In Databricks: create the NetSuite connection for Lakeflow Connect and enter the SuiteAnalytics Connect credentials | Landing NetSuite data; every spike from S-03 on |
+| Upload the driver JAR itself (`NQjc.jar`, from inside the downloaded zip) to `/Volumes/client_one/bronze/netsuite_jars`. Only the zip is there now, and the pipeline needs a JAR path | Creating the ingestion pipeline; every spike from S-03 on |
 | Open a Snowflake trial when the comparison starts | The bake-off only |
 | O-013: add Trial Balance, Inventory Valuation and AR aging to the connected role's reports, or accept Income Statement tie-outs only | Three of the four tie-outs |
 | O-011: the rounding rule for "ties to the cent" | Certifying consolidated figures |
