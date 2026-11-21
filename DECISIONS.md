@@ -24,7 +24,7 @@ Each entry: what, who decided, when, and on what basis. "Council" means the thre
 | D-016 | No calendar schedule. Work runs in dependency order; a gate passes when its evidence exists. This replaces the six-week timebox in D-010 | Owner | 2026-11-20 | Owner: no schedules that run slower than needed |
 | D-017 | Multi-book translation is out of scope for client one | Claude | 2026-11-20 | The account has one accounting book (S-00) |
 | D-018 | Custom read-only SuiteQL queries against client one have standing approval. Default to aggregates; hard ceiling of 1,000 rows per query; anything larger goes through the batch lane | Owner approved; cap set by Claude | 2026-11-20 | 1,000 rows is one page, so one request and one concurrency slot (Oracle paging documentation). The account already throttled light discovery. Bulk belongs in the governed batch lane |
-| D-019 | SuiteAnalytics Connect is enabled on client one | Owner | 2026-11-20 | Owner's statement. Not yet confirmed by a connection test |
+| D-019 | SuiteAnalytics Connect is enabled on client one | Owner | 2026-11-20 | Confirmed 2026-11-20 by a successful token-based login and query from the owner's computer (S-03b) |
 | D-020 | The connected NetSuite role stays as configured. The builder still never writes | Owner | 2026-11-20 | Owner: what is set up is permissible. If the tie-out reports are refused under this role, that comes back as a finding from S-02 |
 
 | D-021 | The manifest grammar gains a `derived` metric type: add or subtract two or more named metrics. Closes O-008 | Claude | 2026-11-20 | Gross profit and net ordinary income could not be defined without it. The operator list is closed, so it adds no free-form logic |
