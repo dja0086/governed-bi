@@ -43,6 +43,7 @@ Each entry: what, who decided, when, and on what basis. "Council" means the thre
 | O-012 | The filter list has no other-income or other-expense account filters, so net income cannot be defined. Add them? | Claude to propose | Full P&L |
 | O-013 | Trial Balance, Inventory Valuation and AR aging are not in the connected role's report list. Add them to the role, or tie out only the Income Statement? | Owner | Three of the four tie-outs |
 | O-014 | Can queries under this role reach every posting the Income Statement includes (payroll, rent, depreciation)? | Next discovery pass | Whether the P&L tie-out can pass |
+| O-015 | The ingestion token appears to sit on a full-access role (1453, "Power User": full on transactions, Manage Users, SuiteScript). Acceptable on the test-drive account; move to a dedicated read-only role before any real account? | Owner | Onboarding a real account |
 | O-010 | A test-drive account proves the method, not behaviour on a real company. Which real account follows? | Owner | Selling; not phase 0 |
 
 ## Closed
