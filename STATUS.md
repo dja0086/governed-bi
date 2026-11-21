@@ -44,7 +44,7 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 ## Standing instruction
 
 - D-027: production-grade architecture only. The seed load is a stopgap. The GitHub runner reach test (branch `runner-reach-test`, unmerged) proved reachability and is not an ingestion design.
-- New Databricks account on a business email exists (workspace 7474653267700225). Verified 2026-11-21: serverless egress to NetSuite is blocked there too while it is a trial. Not migrated. Next test: after the owner adds a payment method.
+- New Databricks account on a business email exists (workspace 7474653267700225). Verified 2026-11-21: serverless egress to NetSuite is blocked there too while it is a trial. Payment method added 2026-11-21; still blocked (S-03b). Not migrated. Next: account verification request to Databricks, sent by the owner.
 
 ## Findings so far
 
