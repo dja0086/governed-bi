@@ -46,6 +46,11 @@ Phase 0 (evidence gate) is under way. No calendar schedule (D-016): work runs in
 - D-027: production-grade architecture only. The seed load is a stopgap. The GitHub runner reach test (branch `runner-reach-test`, unmerged) proved reachability and is not an ingestion design.
 - New Databricks account on a business email exists (workspace 7474653267700225). Verified 2026-11-21: serverless egress to NetSuite is blocked there too while it is a trial. Payment method added 2026-11-21; still blocked (S-03b). Not migrated. Next: account verification request to Databricks, sent by the owner.
 
+## Current step (D-031, owner, 2026-11-22)
+
+- Knowi trial against client one. The plugin and its three skills were removed from the repository (recoverable from history, pull request 23). The draft Claude Data dashboard still exists in the owner's Claude account and was not touched.
+- Carry into the trial: never sum `netamount` across subsidiaries (one subsidiary in another currency dominates the raw sum); `ORDER BY` a column position fails in SuiteQL; order counts by year and by subsidiary for 2017 are known and tie to each other, so they are the first check of any Knowi query.
+
 ## Direction (D-029, owner, 2026-11-21)
 
 - Version 1: direct to NetSuite, no database. Chat and report building through Claude on Oracle's NetSuite AI Connector; standing dashboards in NetSuite's own analytics; Knowi under evaluation as a dashboard product on live SuiteQL.
