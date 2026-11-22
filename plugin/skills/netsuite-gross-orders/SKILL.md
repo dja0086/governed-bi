@@ -38,7 +38,7 @@ SELECT * FROM (
 
 ## Always tell the user
 
-- **Currency:** `netamount` is added across subsidiaries with no conversion. For more than one subsidiary, group by subsidiary and do not present a single total as consolidated.
+- **Currency:** `netamount` is in each subsidiary's own currency. Never add it across subsidiaries: on the first test account, one subsidiary reporting in a different currency made up most of the unconverted sum. Always group by subsidiary, or filter to one, until a consolidated basis is defined.
 - **Tie-out:** this number has not been tied to a NetSuite report.
 
 ## Check before answering
