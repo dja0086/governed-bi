@@ -1,0 +1,1 @@
+{"name": "governed-bi", "owner": {"name": "Governed BI"}, "plugins": [{"name": "netsuite-governed-bi", "source": "./plugin"}]}
