@@ -16,4 +16,4 @@ Date filter, added to WHERE:
 AND t.trandate >= TO_DATE('2017-01-01','YYYY-MM-DD') AND t.trandate < TO_DATE('2018-01-01','YYYY-MM-DD')
 ```
 
-These joins are unverified on a live account. Confirm each column with the SuiteQL metadata tool the first time it is used, and tell the user if a column is missing.
+Verified on a live account 2026-11-22: the subsidiary join, with the date filter; its order and line counts equal the ungrouped query's. The customer, item and department joins are unverified: confirm each column with the SuiteQL metadata tool the first time it is used, and tell the user if a column is missing.

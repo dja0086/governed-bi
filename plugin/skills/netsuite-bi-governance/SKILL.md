@@ -36,6 +36,7 @@ State the scope with every amount: which subsidiaries, which currency basis, whi
 SELECT * FROM ( <aggregating query with GROUP BY and ORDER BY> ) WHERE ROWNUM <= 1000
 ```
 
+- Order by a column name or alias, never by position: `ORDER BY 4` fails with "Invalid or unsupported search".
 - SuiteQL is Oracle-flavoured: `NVL`, `TO_DATE`, `TO_CHAR`, `SUBSTR`; no `WITH`, no `LIMIT`, no `OFFSET`.
 - Check field names with the SuiteQL metadata tool before using a table for the first time.
 - One NetSuite call at a time. On "Too Many Requests", wait and retry once, then stop and say so.
